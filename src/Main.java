@@ -4,18 +4,26 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-//        JFrame frame = new JFrame("App");
-//        JLabel label = new JLabel("whaddup");
-//        frame.add(label);
-//        frame.setSize(500, 500);
-//        frame.getContentPane().setBackground(Color.red);
-//        JTextField textField = new JTextField("Type Here");
-//        frame.add(textField);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setVisible(true);
+JFrame frame = new JFrame("App");
+JPanel panel = new JPanel();
+panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+JLabel label = new JLabel("Welcome!");
+JButton button = new JButton("Generate");
+frame.add(button);
+frame.add(label);
+panel.add(label);
+panel.add(button);
+frame.add(panel);
+
+label.setFont(new Font("Comic-Sans", Font.BOLD, 30));
+frame.setSize(1920, 1080);
+frame.getContentPane().setBackground(Color.white);
+frame.setVisible(true);
         WordBase wb = new WordBase();
-            System.out.println("Me " + wb.getControlVerb() + " my " + wb.getAdjective() + " " + wb.getIdentity() + " via " + wb.getInstrumentNoun() + " so that he " + wb.getOutcome());
-        }
+        button.addActionListener(e -> {
+           label.setText(wb.ToString());
+        });
+    }
 
 
 

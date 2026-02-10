@@ -2,10 +2,10 @@ import java.util.Random;
 
 public class WordBase {
     private static String[] ControlVerbs = {"chud", "goycel", "bugman", "wagie", "paypig", "normoid", "plebcel", "consumer", "npc", "serf", "vatgrown citizen", "midwit", "civvie", "drone"};
-    private static String[] Adjectives = {"neurocompliant", "obedience-trained", "soy-infused", "compliance-grade", "serotonin-depleted", "hyperprocessed", "domesticated", "stimulation-dependent", "low-agency", "comfort-conditioned", "algorithm-fed", "sedation-stabilized", "consumption-optimized", "behavior-neutralized", "passivity-enhanced"};
-    private static String[] Identity = {"nutrient slurry", "ration paste", "consumer feed", "dopamine ration", "stimulation stream", "algorithmic pipeline", "enrichment protocol", "compliance regimen", "sedation mixture", "content feed", "behavioral conditioning program", "neural enrichment slurry", "consumption grid", "broadcast pipeline", "metabolic ration block"};
-    private static String[] InstrumentNoun = {"obedience-maxxing", "comfort-maxxing", "consumption-maxxing", "sedation-maxxing", "compliance-maxxing", "convenience-maxxing", "stimulation-maxxing", "dependency-maxxing", "entertainment-maxxing", "security-maxxing", "routine-maxxing", "conformity-maxxing", "normcel", "wagecel", "consumercel", "retailcel", "comfortcel", "civcel", "mediacel", "statuscel", "dopaminecel", "routinecel"};
-    private static String[] StateVerb = {"conditioning", "compliance-training", "obedience-calibrating", "sedation-feeding", "behavior-optimizing", "stimulation-regulating", "dopamine-metering", "consumption-integrating", "routine-stabilizing", "dependency-conditioning", "cognition-dampening", "impulse-regulating", "pattern-reinforcing", "control-looping"};
+    private static String[] Adjectives = {"neurocompliant", "obedience-trained", "soy-infused", "compliance-grade", "serotonin-depleted", "hyperprocessed", "domesticated", "stimulation-dependent", "low-agency", "comfort-conditioned", "algorithm-fed", "sedation-stabilized", "consumption-optimized", "behavior-neutralized", "passivity-enhanced" , "chud", "terracchud", "brontochud", "foid", "chadlite", "Adamlite", "Stacy", "Becky", "Chad", "truecel", "makeupcel", "consumercel", "chud army", "lookmaxers"};
+    private static String[] Identity = {"nutrient slurry", "ration paste", "consumer feed", "dopamine ration", "stimulation stream", "algorithmic pipeline", "enrichment protocol", "compliance regimen", "sedation mixture", "content feed", "behavioral conditioning program", "neural enrichment slurry", "consumption grid", "broadcast pipeline", "metabolic ration block", "sub5", "6’2", "4’3", "negative", "fakecel", "fraud", "newborn", "star quarterback", "millionaire", "secret"};
+    private static String[] InstrumentNoun = {"obedience-maxxing", "comfort-maxxing", "consumption-maxxing", "sedation-maxxing", "compliance-maxxing", "convenience-maxxing", "stimulation-maxxing", "dependency-maxxing", "entertainment-maxxing", "security-maxxing", "routine-maxxing", "conformity-maxxing", "normcel", "wagecel", "consumercel", "retailcel", "comfortcel", "civcel", "mediacel", "statuscel", "dopaminecel", "routinecel" , "Chudtopia", "mountains of God Gandy", "jerkmate World Cup", "spy baby monitor", "4chan", "family"};
+    private static String[] StateVerb = {"conditioning", "compliance-training", "obedience-calibrating", "sedation-feeding", "behavior-optimizing", "stimulation-regulating", "dopamine-metering", "consumption-integrating", "routine-stabilizing", "dependency-conditioning", "cognition-dampening", "impulse-regulating", "pattern-reinforcing", "control-looping" , "chadlite", "Adamlite", "terracchud", "brontochud makeupcel", "truecel", "fakecel lookmaxers", "surgerymaxxing" , "exposes", "bans", "proves", "reminds", "dies", "swoon", "access", "teach", "joins", "results in"};
     private static String[] Outcome = {"assimilates", "integrates", "converges", "upgrades", "aligns", "stabilizes", "transitions", "merges", "normalizes", "adapts", "locks into", "calibrates to", "synchronizes with", "stabilizes within", "embeds into"};
 
     public static String getControlVerb() {
@@ -31,5 +31,8 @@ public class WordBase {
         public static String getOutcome() {
         Random rand = new Random();
         return Outcome[rand.nextInt(Outcome.length)];
+        }
+        public String ToString() {
+        return "Me " + getControlVerb() + " my " + getAdjective() + " " + getIdentity() + " via " + getInstrumentNoun() + " so that he " + getOutcome();
         }
 }
