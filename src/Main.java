@@ -6,16 +6,33 @@ import java.util.*;
 public class Main {
     private static String Sentence = "";
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
 
-JFrame frame = new JFrame("App");
+        JFrame frame = new JFrame("App");
 JPanel panel = new JPanel();
-panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+panel.setLayout(new FlowLayout(FlowLayout.CENTER, 90, 450));
 JLabel label = new JLabel("Welcome!");
 DefaultListModel<String> model = new DefaultListModel<>();
 JList<String> list = new JList<>(model);
+
+// Buttons
 JButton GenButton = new JButton("Generate");
+
+
 JButton SaveButton = new JButton("Save");
+
 JButton DisplayButton = new JButton("Display Saved");
+
 frame.add(DisplayButton);
 frame.add(SaveButton);
 frame.add(list);
@@ -27,10 +44,11 @@ panel.add(list);
 panel.add(SaveButton);
 panel.add(GenButton);
 frame.add(panel);
-label.setFont(new Font("Comic-Sans", Font.BOLD, 30));
+
+
+label.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 frame.setSize(1920, 1080);
 frame.setTitle("EnglishMaxxing");
-frame.getContentPane().setBackground(Color.white);
 frame.setVisible(true);
         WordBase wb = new WordBase();
         SaveSystem sys = new SaveSystem();
