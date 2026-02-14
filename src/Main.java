@@ -1,85 +1,101 @@
 import javax.swing.*;
 import java.awt.*;
-import java.lang.annotation.ElementType;
-import java.util.*;
 
 public class Main {
     private static String Sentence = "";
+
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedLookAndFeelException e) {
-            throw new RuntimeException(e);
-        }
+        SwingUtilities.invokeLater(Main::createAndShowUI);
+    }
 
-        JFrame frame = new JFrame("App");
-JPanel panel = new JPanel();
-panel.setLayout(new FlowLayout(FlowLayout.CENTER, 90, 450));
-JLabel label = new JLabel("Welcome!");
-DefaultListModel<String> model = new DefaultListModel<>();
-JList<String> list = new JList<>(model);
+    private static void createAndShowUI() {
+        JFrame frame = new JFrame("EnglishMaxxing");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-// Buttons
-JButton GenButton = new JButton("Generate");
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        frame.setContentPane(panel);
 
+        // ===== CENTER TEXT =====
+        JTextArea label = new JTextArea("Welcome!");
+        label.setWrapStyleWord(true);
+        label.setLineWrap(true);
+        label.setEditable(false);
+        label.setOpaque(false);
+        label.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
 
-JButton SaveButton = new JButton("Save");
+        // Give it a reasonable preferred size so it doesn't wrap weirdly
+        label.setColumns(40);
+        label.setRows(4);
 
-JButton DisplayButton = new JButton("Display Saved");
+        JPanel centerWrap = new JPanel(new GridBagLayout());
+        centerWrap.setOpaque(false);
+        centerWrap.add(label);
 
-frame.add(DisplayButton);
-frame.add(SaveButton);
-frame.add(list);
-frame.add(GenButton);
-frame.add(label);
-panel.add(DisplayButton);
-panel.add(label);
-panel.add(list);
-panel.add(SaveButton);
-panel.add(GenButton);
-frame.add(panel);
+        panel.add(centerWrap, BorderLayout.CENTER);
 
+        // ===== LIST (RIGHT SIDE) =====
+        DefaultListModel<String> model = new DefaultListModel<>();
+        JList<String> list = new JList<>(model);
 
-label.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-frame.setSize(1920, 1080);
-frame.setTitle("EnglishMaxxing");
-frame.setVisible(true);
+        JScrollPane listScroll = new JScrollPane(list);
+        listScroll.setPreferredSize(new Dimension(350, 0));
+        panel.add(listScroll, BorderLayout.EAST);
+
+        // ===== BUTTONS (BOTTOM) =====
+        JButton GenButton = new JButton("Generate");
+        JButton SaveButton = new JButton("Save");
+        JButton DisplayButton = new JButton("Display Saved");
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        buttonPanel.add(GenButton);
+        buttonPanel.add(SaveButton);
+        buttonPanel.add(DisplayButton);
+
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // ===== SHOW FRAME =====
+        frame.setSize(1200, 700);           // use smaller while debugging
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        // ===== YOUR LOGIC =====
         WordBase wb = new WordBase();
         SaveSystem sys = new SaveSystem();
+
         GenButton.addActionListener(e -> {
-            Sentence = wb.ToString();
-           label.setText(Sentence);
+            Sentence = wb.GetString();
+            label.setText(Sentence);
+
+            // Force layout refresh if needed
+            label.revalidate();
+            label.repaint();
         });
+
         SaveButton.addActionListener(e -> {
             boolean exists = false;
+
             if (sys.getSentences() == null || sys.getSentences().isEmpty()) {
                 sys.saveSentences(Sentence);
+                return;
             }
+
             for (String s : sys.getSentences()) {
                 if (s.equals(Sentence)) {
                     exists = true;
                     break;
                 }
-                    if (!exists) {
-                        sys.saveSentences(Sentence);
-                    }
-                }
+            }
 
+            if (!exists) {
+                sys.saveSentences(Sentence);
+            }
         });
+
         DisplayButton.addActionListener(e -> {
+            model.clear();
             for (String s : sys.getSentences()) {
                 model.addElement(s);
             }
         });
     }
-
-
-
-
-    }
+}
